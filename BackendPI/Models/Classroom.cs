@@ -10,7 +10,7 @@ namespace BackendPI.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Child> Children { get; set; }
-        public List<Teacher> Teachers { get; set; }
+        public List<ChildClassroom> ChildrenClassrooms { get; set; }
+        public List<TeacherClassroom> TeachersClassrooms { get; set; }
     }
 }

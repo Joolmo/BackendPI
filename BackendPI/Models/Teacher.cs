@@ -15,7 +15,7 @@ namespace BackendPI.Models
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public List<TeacherClassroom> Classrooms { get; set; }
+        public List<TeacherClassroom> TeachersClasrooms { get; set; }
     }
  
 }

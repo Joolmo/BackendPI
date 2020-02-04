@@ -21,15 +21,11 @@ namespace BackendPI.Migrations
                 {
                     b.Property<int>("Id");
 
-                    b.Property<int?>("ClassroomId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Surname");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassroomId");
 
                     b.ToTable("Children");
                 });
@@ -41,9 +37,7 @@ namespace BackendPI.Migrations
 
                     b.Property<int>("ChildId");
 
-                    b.Property<int>("ClasroomId");
-
-                    b.Property<int?>("ClassroomId");
+                    b.Property<int>("ClassroomId");
 
                     b.HasKey("Id");
 
@@ -75,7 +69,7 @@ namespace BackendPI.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("IdChildren");
+                    b.Property<int>("IdChild");
 
                     b.HasKey("Id");
 
@@ -88,17 +82,13 @@ namespace BackendPI.Migrations
                 {
                     b.Property<int>("Id");
 
-                    b.Property<int?>("ClassroomId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Surname");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassroomId");
-
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("BackendPI.Models.TeacherClassroom", b =>
@@ -106,9 +96,7 @@ namespace BackendPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ClasroomId");
-
-                    b.Property<int?>("ClassroomId");
+                    b.Property<int>("ClassroomId");
 
                     b.Property<int>("TeacherId");
 
@@ -137,12 +125,8 @@ namespace BackendPI.Migrations
 
             modelBuilder.Entity("BackendPI.Models.Child", b =>
                 {
-                    b.HasOne("BackendPI.Models.Classroom")
-                        .WithMany("Children")
-                        .HasForeignKey("ClassroomId");
-
                     b.HasOne("BackendPI.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Children")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -150,30 +134,27 @@ namespace BackendPI.Migrations
             modelBuilder.Entity("BackendPI.Models.ChildClassroom", b =>
                 {
                     b.HasOne("BackendPI.Models.Child", "Child")
-                        .WithMany("Classrooms")
+                        .WithMany("ChildrenClassrooms")
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BackendPI.Models.Classroom", "Classroom")
-                        .WithMany()
-                        .HasForeignKey("ClassroomId");
+                        .WithMany("ChildrenClassrooms")
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BackendPI.Models.Report", b =>
                 {
-                    b.HasOne("BackendPI.Models.Child")
+                    b.HasOne("BackendPI.Models.Child", "Child")
                         .WithMany("Reports")
                         .HasForeignKey("ChildId");
                 });
 
             modelBuilder.Entity("BackendPI.Models.Teacher", b =>
                 {
-                    b.HasOne("BackendPI.Models.Classroom")
-                        .WithMany("Teachers")
-                        .HasForeignKey("ClassroomId");
-
                     b.HasOne("BackendPI.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Teachers")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -181,11 +162,12 @@ namespace BackendPI.Migrations
             modelBuilder.Entity("BackendPI.Models.TeacherClassroom", b =>
                 {
                     b.HasOne("BackendPI.Models.Classroom", "Classroom")
-                        .WithMany()
-                        .HasForeignKey("ClassroomId");
+                        .WithMany("TeachersClassrooms")
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BackendPI.Models.Teacher", "Teacher")
-                        .WithMany("Classrooms")
+                        .WithMany("TeachersClasrooms")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

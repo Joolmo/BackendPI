@@ -12,7 +12,7 @@ namespace BackendPI.Models
         public int ChildId { get; set; }
         public Child Child { get; set; }
 
-        public int ClasroomId { get; set; }
+        public int ClassroomId { get; set; }
         public Classroom Classroom { get; set; }
     }
 }

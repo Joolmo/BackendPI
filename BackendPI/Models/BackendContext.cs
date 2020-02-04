@@ -29,5 +29,12 @@ namespace BackendPI.Models
                 optionsBuilder.UseMySql("Server=localhost;Database=BullyApp;Uid=root;Pwd=''; SslMode = none");
             }
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Child>().ToTable("Children");
+            modelBuilder.Entity<Teacher>().ToTable("Teachers");
+
+        }
     }
 }

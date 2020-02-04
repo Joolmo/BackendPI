@@ -40,18 +40,11 @@ namespace BackendPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    ClassroomId = table.Column<int>(nullable: true)
+                    Surname = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Children", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Children_Classrooms_ClassroomId",
-                        column: x => x.ClassroomId,
-                        principalTable: "Classrooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Children_Users_Id",
                         column: x => x.Id,
@@ -61,25 +54,18 @@ namespace BackendPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teacher",
+                name: "Teachers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    ClassroomId = table.Column<int>(nullable: true)
+                    Surname = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teacher", x => x.Id);
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teacher_Classrooms_ClassroomId",
-                        column: x => x.ClassroomId,
-                        principalTable: "Classrooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Teacher_Users_Id",
+                        name: "FK_Teachers_Users_Id",
                         column: x => x.Id,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -93,8 +79,7 @@ namespace BackendPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ChildId = table.Column<int>(nullable: false),
-                    ClasroomId = table.Column<int>(nullable: false),
-                    ClassroomId = table.Column<int>(nullable: true)
+                    ClassroomId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,7 +95,7 @@ namespace BackendPI.Migrations
                         column: x => x.ClassroomId,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,8 +105,8 @@ namespace BackendPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
-                    IdChildren = table.Column<int>(nullable: false),
-                    ChildId = table.Column<int>(nullable: true)
+                    ChildId = table.Column<int>(nullable: true),
+                    IdChild = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,8 +126,7 @@ namespace BackendPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TeacherId = table.Column<int>(nullable: false),
-                    ClasroomId = table.Column<int>(nullable: false),
-                    ClassroomId = table.Column<int>(nullable: true)
+                    ClassroomId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,11 +136,11 @@ namespace BackendPI.Migrations
                         column: x => x.ClassroomId,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherClassroom_Teacher_TeacherId",
+                        name: "FK_TeacherClassroom_Teachers_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teacher",
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -172,19 +156,9 @@ namespace BackendPI.Migrations
                 column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Children_ClassroomId",
-                table: "Children",
-                column: "ClassroomId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reports_ChildId",
                 table: "Reports",
                 column: "ChildId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teacher_ClassroomId",
-                table: "Teacher",
-                column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeacherClassroom_ClassroomId",
@@ -212,10 +186,10 @@ namespace BackendPI.Migrations
                 name: "Children");
 
             migrationBuilder.DropTable(
-                name: "Teacher");
+                name: "Classrooms");
 
             migrationBuilder.DropTable(
-                name: "Classrooms");
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "Users");
