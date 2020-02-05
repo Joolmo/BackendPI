@@ -11,7 +11,16 @@ namespace BackendPI.Models
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public List<Child> Children { get; set; }
-        public List<Teacher> Teachers { get; set; }
+        public Child Child { get; set; }
+        public Teacher Teacher { get; set; }
+    }
+
+    public class UserDTO
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+
+        public bool IsTeacher { get; set; }
     }
 }

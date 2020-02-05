@@ -246,12 +246,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Migrations\20200205145936_m1.cs" />
-    <Compile Include="Migrations\20200205145936_m1.designer.cs">
-      <DependentUpon>20200205145936_m1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\BackendContextModelSnapshot.cs" />
     <Compile Include="Models\BackendContext.cs" />
     <Compile Include="Models\Child.cs" />
     <Compile Include="Models\ChildClassroom.cs" />
@@ -263,6 +259,7 @@
     </Compile>
     <Compile Include="Models\TeacherClassroom.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
