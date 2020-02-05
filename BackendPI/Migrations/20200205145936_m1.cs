@@ -54,7 +54,7 @@ namespace BackendPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teachers",
+                name: "Teacher",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -63,9 +63,9 @@ namespace BackendPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                    table.PrimaryKey("PK_Teacher", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teachers_Users_Id",
+                        name: "FK_Teacher_Users_Id",
                         column: x => x.Id,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -105,8 +105,7 @@ namespace BackendPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
-                    ChildId = table.Column<int>(nullable: true),
-                    IdChild = table.Column<int>(nullable: false)
+                    ChildId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,7 +115,7 @@ namespace BackendPI.Migrations
                         column: x => x.ChildId,
                         principalTable: "Children",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,9 +137,9 @@ namespace BackendPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherClassroom_Teachers_TeacherId",
+                        name: "FK_TeacherClassroom_Teacher_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teachers",
+                        principalTable: "Teacher",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -189,7 +188,7 @@ namespace BackendPI.Migrations
                 name: "Classrooms");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                name: "Teacher");
 
             migrationBuilder.DropTable(
                 name: "Users");
