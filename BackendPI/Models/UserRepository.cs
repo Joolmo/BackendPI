@@ -41,32 +41,84 @@ namespace BackendPI.Models
 
         //funciones que devuelvan un teacher y un child según su id.
 
-        internal User RetrieveTeacher(int id) {
-            User teacher;
+        internal TeacherDTO RetrieveTeacher(int id) {
+            TeacherDTO teacher;
 
             using (var context = new BackendContext()) {
                 teacher = context.Users
                     .Include(s => s.Teacher)
                     .Where(s => s.Id == id)
+                    .Select(s => new TeacherDTO() {
+                        Id = s.Id,
+                        Name = s.Teacher.Name,
+                        Surname = s.Teacher.Surname,
+                        UserName = s.UserName,
+                        Password = s.Password
+                    })
                     .FirstOrDefault();
             }
 
             return teacher;
         }
 
-        internal User RetrieveChild(int id)
+        internal List<TeacherDTO> RetrieveAllTeachers() {
+            List<TeacherDTO> teachers = new List<TeacherDTO>();
+            using (BackendContext context = new BackendContext()) {
+                teachers = context.Users
+                    .Include(s => s.Teacher)
+                    .Where(s => s.Teacher != null)
+                    .Select(s => new TeacherDTO()
+                    {
+                        Id = s.Id,
+                        Name = s.Teacher.Name,
+                        Surname = s.Teacher.Surname,
+                        UserName = s.UserName,
+                        Password = s.Password
+                    }).ToList();
+            }
+            return teachers;
+        }
+
+        internal ChildDTO RetrieveChild(int id)
         {
-            User child;
+            ChildDTO child;
 
             using (var context = new BackendContext())
             {
                 child = context.Users
                     .Include(s => s.Child)
                     .Where(s => s.Id == id)
+                    .Select(s => new ChildDTO() {
+                        Id = s.Id,
+                        Name = s.Child.Name,
+                        Surname = s.Child.Surname,
+                        UserName = s.UserName,
+                        Password = s.Password
+                    })
                     .FirstOrDefault();
             }
 
             return child;
+        }
+
+        internal List<ChildDTO> RetrieveAllChildren()
+        {
+            List<ChildDTO> children = new List<ChildDTO>();
+            using (BackendContext context = new BackendContext())
+            {
+                children = context.Users
+                    .Include(s => s.Child)
+                    .Where(s => s.Child != null)
+                    .Select(s => new ChildDTO()
+                    {
+                        Id = s.Id,
+                        Name = s.Child.Name,
+                        Surname = s.Child.Surname,
+                        UserName = s.UserName,
+                        Password = s.Password
+                    }).ToList();
+            }
+            return children;
         }
     }
 }

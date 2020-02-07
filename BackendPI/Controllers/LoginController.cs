@@ -23,10 +23,19 @@ namespace BackendPI.Controllers
         }
 
         // POST: api/Login
-        public UserDTO Post([FromBody] User user)
+        public ServerResponse<UserDTO> Post([FromBody] User user)
         {
             UserRepository repo = new UserRepository();
-            return repo.LogIn(user.UserName, user.Password); 
+            var userDTO = repo.LogIn(user.UserName, user.Password);
+
+            var data = new List<UserDTO>();
+            data.Add(userDTO);
+
+            return new ServerResponse<UserDTO>()
+            {
+                Result = userDTO != null,
+                Data = data
+            };
         }
 
         // PUT: api/Login/5
