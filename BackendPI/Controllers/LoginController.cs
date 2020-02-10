@@ -39,7 +39,7 @@ namespace BackendPI.Controllers
             };
         }
 
-        //PRINCIPIO
+        /*PRINCIPIO
 
         /// <summary>
         /// login controller class for authenticate users
@@ -84,7 +84,7 @@ namespace BackendPI.Controllers
             }
         }
 
-        // FIN
+        // FIN*/
 
         // PUT: api/Login/5
         public void Put(int id, [FromBody]string value)
