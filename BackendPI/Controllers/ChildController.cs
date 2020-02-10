@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace BackendPI.Controllers
 {
+    [Authorize]
     public class ChildController : ApiController
     {
         // GET: api/Child

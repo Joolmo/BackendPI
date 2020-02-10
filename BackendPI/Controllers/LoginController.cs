@@ -11,89 +11,34 @@ namespace BackendPI.Controllers
 {
     public class LoginController : ApiController
     {
-        // GET: api/Login
-        public IEnumerable<string> Get()
+        [HttpPost]
+        [AllowAnonymous]
+        public IHttpActionResult Authenticate([FromBody] User user)
         {
-            return new string[] { "value1", "value2" };
-        }
+            if (user == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-        // GET: api/Login/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Login
-        public ServerResponse<UserDTO> Post([FromBody] User user)
-        {
             UserRepository repo = new UserRepository();
             var userDTO = repo.LogIn(user.UserName, user.Password);
 
-            var data = new List<UserDTO>();
-            data.Add(userDTO);
-
-            return new ServerResponse<UserDTO>()
+            if (userDTO != null)
             {
-                Result = userDTO != null,
-                Data = data
-            };
-        }
+                userDTO.Token = TokenGenerator.GenerateTokenJwt(userDTO.UserName);
+                var data = new List<UserDTO>();
+                data.Add(userDTO);
 
-        /*PRINCIPIO
-
-        /// <summary>
-        /// login controller class for authenticate users
-        /// </summary>
-        [AllowAnonymous]
-        [RoutePrefix("api/login")]
-        public class LoginController : ApiController
-        {
-            [HttpGet]
-            [Route("echoping")]
-            public IHttpActionResult EchoPing()
-            {
-                return Ok(true);
-            }
-
-            [HttpGet]
-            [Route("echouser")]
-            public IHttpActionResult EchoUser()
-            {
-                var identity = Thread.CurrentPrincipal.Identity;
-                return Ok($" IPrincipal-user: {identity.Name} - IsAuthenticated: {identity.IsAuthenticated}");
-            }
-
-            [HttpPost]
-            [Route("authenticate")]
-            public IHttpActionResult Authenticate(LoginRequest login)
-            {
-                if (login == null)
-                    throw new HttpResponseException(HttpStatusCode.BadRequest);
-
-                //TODO: Validate credentials Correctly, this code is only for demo !!
-                bool isCredentialValid = (login.Password == "123456");
-                if (isCredentialValid)
+                var result = new ServerResponse<UserDTO>()
                 {
-                    var token = TokenGenerator.GenerateTokenJwt(login.Username);
-                    return Ok(token);
-                }
-                else
-                {
-                    return Unauthorized();
-                }
+                    Result = userDTO != null,
+                    Data = data
+                };
+
+                return Ok(result);
             }
-        }
-
-        // FIN*/
-
-        // PUT: api/Login/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Login/5
-        public void Delete(int id)
-        {
+            else
+            {
+                return Unauthorized();
+            }
         }
     }
 }
