@@ -26,7 +26,7 @@ namespace BackendPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("Server=localhost;Database=BullyApp;Uid=root;Pwd=''; SslMode = none");
+                optionsBuilder.UseMySql("Server=proyectointegrado.czg8xnl9zih7.us-east-2.rds.amazonaws.com;Database=BullyApp;Uid=root;Pwd='PI123456';");
             }
         }
 
