@@ -261,6 +261,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginRequest.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\TokenGenerator.cs" />
     <Compile Include="Controllers\TokenValidationHandler.cs" />
@@ -275,6 +276,7 @@
     <Compile Include="Models\ChildClassroom.cs" />
     <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\ReportRepository.cs" />
     <Compile Include="Models\ServerResponse.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Global.asax.cs">
