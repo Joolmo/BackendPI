@@ -120,5 +120,27 @@ namespace BackendPI.Models
             }
             return children;
         }
+
+        internal void SaveTeacher(TeacherDTO t)
+        {
+            BackendContext context = new BackendContext();
+
+            Teacher teacher = new Teacher()
+            {
+                Id = t.Id,
+                Surname = t.Surname,
+                Name = t.Name,
+            };
+
+            User user = new User() {
+                Id = t.Id,
+                UserName = t.UserName,
+                Password = t.Password,
+            };
+
+            context.Users.Add(user);
+            context.Teachers.Add(teacher);
+            context.SaveChanges();
+        }
     }
 }

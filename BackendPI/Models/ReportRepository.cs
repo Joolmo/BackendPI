@@ -21,5 +21,14 @@ namespace BackendPI.Models
             }
             return reports;
         }
+
+        internal void Save(Report r)
+        {
+            BackendContext context = new BackendContext();
+
+            context.Reports.Add(r);
+            context.SaveChanges();
+
+        }
     }
 }

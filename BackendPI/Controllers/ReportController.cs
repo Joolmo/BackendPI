@@ -8,6 +8,7 @@ using BackendPI.Models;
 
 namespace BackendPI.Controllers
 {
+    [Authorize]
     public class ReportController : ApiController
     {
         // GET: api/Report
@@ -30,8 +31,10 @@ namespace BackendPI.Controllers
         }
 
         // POST: api/Report
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Report report)
         {
+            var repo = new ReportRepository();
+            repo.Save(report);
         }
 
         // PUT: api/Report/5

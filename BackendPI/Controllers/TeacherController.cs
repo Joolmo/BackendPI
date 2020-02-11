@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace BackendPI.Controllers
 {
+    [Authorize]
     public class TeacherController : ApiController
     {
         // GET: api/Teacher
@@ -40,8 +41,10 @@ namespace BackendPI.Controllers
         }
 
         // POST: api/Teacher
-        public void Post([FromBody]string value)
+        public void Post([FromBody]TeacherDTO teacher)
         {
+            var repo = new UserRepository();
+            repo.SaveTeacher(teacher);
         }
 
         // PUT: api/Teacher/5
