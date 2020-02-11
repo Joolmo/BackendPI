@@ -48,8 +48,10 @@ namespace BackendPI.Controllers
         }
 
         // PUT: api/Teacher/5
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]Teacher teacher)
         {
+            var repo = new UserRepository();
+            repo.modifyTeacher(teacher);
         }
 
         // DELETE: api/Teacher/5

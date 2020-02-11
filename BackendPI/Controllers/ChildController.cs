@@ -41,13 +41,17 @@ namespace BackendPI.Controllers
         }
 
         // POST: api/Child
-        public void Post([FromBody]string value)
+        public void Post([FromBody]ChildDTO child)
         {
+            var repo = new UserRepository();
+            repo.SaveChild(child);
         }
 
         // PUT: api/Child/5
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]Child child)
         {
+            var repo = new UserRepository();
+            repo.modifyChild(child);
         }
 
         // DELETE: api/Child/5

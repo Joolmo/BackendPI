@@ -125,21 +125,64 @@ namespace BackendPI.Models
         {
             BackendContext context = new BackendContext();
 
-            Teacher teacher = new Teacher()
-            {
-                Id = t.Id,
-                Surname = t.Surname,
-                Name = t.Name,
-            };
-
             User user = new User() {
-                Id = t.Id,
                 UserName = t.UserName,
                 Password = t.Password,
             };
 
             context.Users.Add(user);
+            context.SaveChanges();
+
+            var id = context.Users.Where(e => e.UserName == t.UserName).First().Id;
+            Teacher teacher = new Teacher()
+            {
+                Id = id,
+                Surname = t.Surname,
+                Name = t.Name,
+            };
+
             context.Teachers.Add(teacher);
+            context.SaveChanges();
+        }
+
+        internal void SaveChild(ChildDTO c)
+        {
+            BackendContext context = new BackendContext();
+
+            User user = new User()
+            {
+                UserName = c.UserName,
+                Password = c.Password,
+            };
+
+            context.Users.Add(user);
+            context.SaveChanges();
+
+            var id = context.Users.Where(e => e.UserName == c.UserName).First().Id;
+            Child child = new Child()
+            {
+                Id = id,
+                Surname = c.Surname,
+                Name = c.Name,
+            };
+
+            context.Children.Add(child);
+            context.SaveChanges();
+        }
+
+        internal void modifyChild(Child child)
+        {
+            BackendContext context = new BackendContext();
+
+            context.Children.Update(child);
+            context.SaveChanges();
+        }
+
+        internal void modifyTeacher(Teacher teacher)
+        {
+            BackendContext context = new BackendContext();
+
+            context.Teachers.Update(teacher);
             context.SaveChanges();
         }
     }
