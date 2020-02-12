@@ -185,5 +185,34 @@ namespace BackendPI.Models
             context.Teachers.Update(teacher);
             context.SaveChanges();
         }
+
+        internal List<ChildDTO> getChildrenByClass(int id)
+        {
+            List<ChildDTO> child;
+
+            using (var context = new BackendContext())
+            {
+                var childIds = context.Classrooms
+                    .Where(s => s.Id == id)
+                    .Include(s => s.ChildrenClassrooms)
+                    .FirstOrDefault()
+                    .ChildrenClassrooms
+                    .Select(s => s.ChildId);
+
+                child = context.Children
+                 .Where(s => childIds.Contains(s.Id))
+                 .Include(s => s.User)
+                 .Select(s => new ChildDTO() {
+                     Id = s.Id,
+                     Name = s.Name,
+                     Surname = s.Surname,
+                     Password = s.User.Password,
+                     UserName = s.User.UserName
+                 })
+                 .ToList();
+            }
+
+            return child;
+        }
     }
 }
