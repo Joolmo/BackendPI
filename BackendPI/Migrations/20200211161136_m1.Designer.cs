@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendPI.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    [Migration("20200210153015_m1")]
+    [Migration("20200211161136_m1")]
     partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace BackendPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("BackendPI.Models.TeacherClassroom", b =>

@@ -85,7 +85,7 @@ namespace BackendPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("BackendPI.Models.TeacherClassroom", b =>

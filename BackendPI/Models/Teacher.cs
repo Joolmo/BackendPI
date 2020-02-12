@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackendPI.Models
 {
+    [Table("Teachers")]
     public class Teacher
     {
         [ForeignKey(nameof(User))]

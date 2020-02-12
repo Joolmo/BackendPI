@@ -54,7 +54,7 @@ namespace BackendPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teacher",
+                name: "Teachers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -63,9 +63,9 @@ namespace BackendPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teacher", x => x.Id);
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teacher_Users_Id",
+                        name: "FK_Teachers_Users_Id",
                         column: x => x.Id,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -137,9 +137,9 @@ namespace BackendPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherClassroom_Teacher_TeacherId",
+                        name: "FK_TeacherClassroom_Teachers_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teacher",
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -188,7 +188,7 @@ namespace BackendPI.Migrations
                 name: "Classrooms");
 
             migrationBuilder.DropTable(
-                name: "Teacher");
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "Users");

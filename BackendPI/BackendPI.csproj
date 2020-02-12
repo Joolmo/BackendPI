@@ -258,24 +258,25 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ChildController.cs" />
+    <Compile Include="Controllers\ClassroomsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
-    <Compile Include="Controllers\TokenGenerator.cs" />
-    <Compile Include="Controllers\TokenValidationHandler.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Migrations\20200210153015_m1.cs" />
-    <Compile Include="Migrations\20200210153015_m1.designer.cs">
-      <DependentUpon>20200210153015_m1.cs</DependentUpon>
+    <Compile Include="TokenHandler\TokenGenerator.cs" />
+    <Compile Include="TokenHandler\TokenValidationHandler.cs" />
+    <Compile Include="Migrations\20200211161136_m1.cs" />
+    <Compile Include="Migrations\20200211161136_m1.designer.cs">
+      <DependentUpon>20200211161136_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BackendContextModelSnapshot.cs" />
     <Compile Include="Models\BackendContext.cs" />
     <Compile Include="Models\Child.cs" />
     <Compile Include="Models\ChildClassroom.cs" />
     <Compile Include="Models\Classroom.cs" />
+    <Compile Include="Repositories\ClassroomsRepository.cs" />
     <Compile Include="Models\Report.cs" />
-    <Compile Include="Models\ReportRepository.cs" />
+    <Compile Include="Repositories\ReportRepository.cs" />
     <Compile Include="Models\ServerResponse.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Global.asax.cs">
@@ -283,7 +284,7 @@
     </Compile>
     <Compile Include="Models\TeacherClassroom.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
