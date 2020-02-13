@@ -263,13 +263,13 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
-    <Compile Include="TokenHandler\TokenGenerator.cs" />
-    <Compile Include="TokenHandler\TokenValidationHandler.cs" />
-    <Compile Include="Migrations\20200211161136_m1.cs" />
-    <Compile Include="Migrations\20200211161136_m1.designer.cs">
-      <DependentUpon>20200211161136_m1.cs</DependentUpon>
+    <Compile Include="Migrations\20200213144708_m1.cs" />
+    <Compile Include="Migrations\20200213144708_m1.designer.cs">
+      <DependentUpon>20200213144708_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BackendContextModelSnapshot.cs" />
+    <Compile Include="TokenHandler\TokenGenerator.cs" />
+    <Compile Include="TokenHandler\TokenValidationHandler.cs" />
     <Compile Include="Models\BackendContext.cs" />
     <Compile Include="Models\Child.cs" />
     <Compile Include="Models\ChildClassroom.cs" />

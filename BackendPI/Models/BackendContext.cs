@@ -13,6 +13,8 @@ namespace BackendPI.Models
         public DbSet<Report> Reports { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Child> Children { get; set; }
+        public DbSet<TeacherClassroom> TeacherClassrooms { get; set; }
+        public DbSet<ChildClassroom> ChildClassrooms { get; set; }
 
         public BackendContext()
         {

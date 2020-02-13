@@ -44,7 +44,7 @@ namespace BackendPI.Migrations
 
                     b.HasIndex("ClassroomId");
 
-                    b.ToTable("ChildClassroom");
+                    b.ToTable("ChildClassrooms");
                 });
 
             modelBuilder.Entity("BackendPI.Models.Classroom", b =>
@@ -103,7 +103,7 @@ namespace BackendPI.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("TeacherClassroom");
+                    b.ToTable("TeacherClassrooms");
                 });
 
             modelBuilder.Entity("BackendPI.Models.User", b =>

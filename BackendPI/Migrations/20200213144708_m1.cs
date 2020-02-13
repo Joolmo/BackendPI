@@ -73,7 +73,7 @@ namespace BackendPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChildClassroom",
+                name: "ChildClassrooms",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -83,15 +83,15 @@ namespace BackendPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChildClassroom", x => x.Id);
+                    table.PrimaryKey("PK_ChildClassrooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ChildClassroom_Children_ChildId",
+                        name: "FK_ChildClassrooms_Children_ChildId",
                         column: x => x.ChildId,
                         principalTable: "Children",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ChildClassroom_Classrooms_ClassroomId",
+                        name: "FK_ChildClassrooms_Classrooms_ClassroomId",
                         column: x => x.ClassroomId,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
@@ -119,7 +119,7 @@ namespace BackendPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherClassroom",
+                name: "TeacherClassrooms",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -129,15 +129,15 @@ namespace BackendPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherClassroom", x => x.Id);
+                    table.PrimaryKey("PK_TeacherClassrooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TeacherClassroom_Classrooms_ClassroomId",
+                        name: "FK_TeacherClassrooms_Classrooms_ClassroomId",
                         column: x => x.ClassroomId,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherClassroom_Teachers_TeacherId",
+                        name: "FK_TeacherClassrooms_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
@@ -145,13 +145,13 @@ namespace BackendPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChildClassroom_ChildId",
-                table: "ChildClassroom",
+                name: "IX_ChildClassrooms_ChildId",
+                table: "ChildClassrooms",
                 column: "ChildId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChildClassroom_ClassroomId",
-                table: "ChildClassroom",
+                name: "IX_ChildClassrooms_ClassroomId",
+                table: "ChildClassrooms",
                 column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
@@ -160,26 +160,26 @@ namespace BackendPI.Migrations
                 column: "ChildId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherClassroom_ClassroomId",
-                table: "TeacherClassroom",
+                name: "IX_TeacherClassrooms_ClassroomId",
+                table: "TeacherClassrooms",
                 column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherClassroom_TeacherId",
-                table: "TeacherClassroom",
+                name: "IX_TeacherClassrooms_TeacherId",
+                table: "TeacherClassrooms",
                 column: "TeacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChildClassroom");
+                name: "ChildClassrooms");
 
             migrationBuilder.DropTable(
                 name: "Reports");
 
             migrationBuilder.DropTable(
-                name: "TeacherClassroom");
+                name: "TeacherClassrooms");
 
             migrationBuilder.DropTable(
                 name: "Children");

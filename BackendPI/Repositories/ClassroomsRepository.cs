@@ -11,15 +11,25 @@ namespace BackendPI.Models
         public List<Classroom> RetrieveByTeacher(int idTeacher)
         {
             var context = new BackendContext();
-            var classesIds = context.Teachers
-                .Where(t => t.Id == idTeacher)
-                .Include(t => t.TeachersClasrooms)
-                .Select(t => t.TeachersClasrooms)
-                .FirstOrDefault()
-                .Select(c => c.ClassroomId);
+            List<Classroom> classrooms;
 
-            var classes = context.Classrooms.Where(c => classesIds.Contains(c.Id)).ToList();
-            return classes;
+            try
+            {
+                classrooms = context.Teachers
+                 .Where(t => t.Id == idTeacher)
+                 .Include(t => t.TeachersClasrooms)
+                 .ThenInclude(tc => tc.Classroom)
+                 .Select(t => t.TeachersClasrooms.Select(tc => tc.Classroom))
+                 .FirstOrDefault()
+                 .ToList();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+            return classrooms;
         }
     }
 }
