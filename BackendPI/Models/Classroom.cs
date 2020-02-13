@@ -13,4 +13,10 @@ namespace BackendPI.Models
         public List<ChildClassroom> ChildrenClassrooms { get; set; }
         public List<TeacherClassroom> TeachersClassrooms { get; set; }
     }
-}
+
+    public class ClassroomDTO
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+ }
