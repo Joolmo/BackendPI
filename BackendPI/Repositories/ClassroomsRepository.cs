@@ -2,16 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+
 
 namespace BackendPI.Models
 {
     public class ClassroomsRepository
     {
-        public List<Classroom> RetrieveByTeacher(int idTeacher)
+        public List<ClassroomDTO> RetrieveByTeacher(int idTeacher)
         {
             var context = new BackendContext();
-            List<Classroom> classrooms;
+            List<ClassroomDTO> classrooms;
 
             try
             {
@@ -21,9 +21,38 @@ namespace BackendPI.Models
                  .ThenInclude(tc => tc.Classroom)
                  .Select(t => t.TeachersClasrooms.Select(tc => tc.Classroom))
                  .FirstOrDefault()
+                 .Select(c => new ClassroomDTO()
+                 {
+                     Id = c.Id,
+                     Name = c.Name
+                 })
                  .ToList();
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+            return classrooms;
+        }
+
+        public List<ClassroomDTO> RetrieveClassrooms()
+        {
+            var context = new BackendContext();
+            List<ClassroomDTO> classrooms;
+
+            try
+            {
+                classrooms = context.Classrooms
+                    .Select(c => new ClassroomDTO()
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    })
+                    .ToList();
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
