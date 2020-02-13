@@ -36,12 +36,14 @@ namespace BackendPI.Controllers
             repo.SaveClassroom(classroom);
         }
 
+        [Route("api/{controller}/teachers")] [HttpPost]
         public void Post([FromBody] TeacherClassroom teacherClassroom)
         {
             var repo = new ClassroomsRepository();
             repo.AddClassroomToTeacher(teacherClassroom.TeacherId, teacherClassroom.ClassroomId);
         }
 
+        [Route("api/{controller}/children")] [HttpPost]
         public void Post([FromBody] ChildClassroom childClassroom)
         {
             var repo = new ClassroomsRepository();
