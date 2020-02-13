@@ -14,7 +14,7 @@ namespace BackendPI.Models
         public List<TeacherClassroom> TeachersClassrooms { get; set; }
     }
 
-    public class ClasdroomDTO
+    public class ClassroomDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

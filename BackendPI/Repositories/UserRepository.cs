@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendPI.Models
 {
@@ -190,26 +190,31 @@ namespace BackendPI.Models
         {
             List<ChildDTO> child;
 
-            using (var context = new BackendContext())
+            try
             {
-                var childIds = context.Classrooms
-                    .Where(s => s.Id == id)
-                    .Include(s => s.ChildrenClassrooms)
-                    .FirstOrDefault()
-                    .ChildrenClassrooms
-                    .Select(s => s.ChildId);
-
-                child = context.Children
-                 .Where(s => childIds.Contains(s.Id))
-                 .Include(s => s.User)
-                 .Select(s => new ChildDTO() {
-                     Id = s.Id,
-                     Name = s.Name,
-                     Surname = s.Surname,
-                     Password = s.User.Password,
-                     UserName = s.User.UserName
-                 })
-                 .ToList();
+                using (var context = new BackendContext())
+                {
+                    child = context.Classrooms
+                        .Where(t => t.Id == id)
+                        .Include(t => t.ChildrenClassrooms)
+                        .ThenInclude(tc => tc.Child.User)
+                        .Select(t => t.ChildrenClassrooms.Select(cc => cc.Child))
+                        .FirstOrDefault()
+                        .Select(c => new ChildDTO()
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            Password = c.User.Password,
+                            Surname = c.Surname,
+                            UserName = c.User.UserName
+                        })
+                        .ToList();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
 
             return child;
