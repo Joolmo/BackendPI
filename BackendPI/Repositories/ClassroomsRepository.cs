@@ -60,5 +60,32 @@ namespace BackendPI.Models
 
             return classrooms;
         }
+
+        internal void SaveClassroom(Classroom c)
+        {
+            BackendContext context = new BackendContext();
+
+            Classroom classroom = new Classroom()
+            {
+                Name = c.Name
+            };
+
+            context.Classrooms.Add(classroom);
+            context.SaveChanges();
+        }
+
+        internal void AddClassroomToTeacher(int idteacher, int idclass)
+        {
+            BackendContext context = new BackendContext();
+
+            TeacherClassroom teacherClassroom = new TeacherClassroom()
+            {
+                ClassroomId = idclass,
+                TeacherId = idteacher,
+            };
+
+            context.TeacherClassrooms.Add(teacherClassroom);
+            context.SaveChanges();
+        }
     }
 }
