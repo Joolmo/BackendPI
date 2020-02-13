@@ -11,40 +11,37 @@ namespace BackendPI.Controllers
     [Authorize]
     public class ReportController : ApiController
     {
-        // GET: api/Report
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/Report/5
-        public ServerResponse<Report> Get(int id)
+        public ServerResponse<Report> GetByChild(int idChild)
         {
             ReportRepository repo = new ReportRepository();
-            var report = repo.RetrieveReports(id);
+            var reports = repo.RetrieveByChild(idChild);
 
             return new ServerResponse<Report>()
             {
-                Result = report != null,
-                Data = report
+                Result = reports != null,
+                Data = reports
+            };
+        }
+
+        public ServerResponse<Report> GetByTeacher(int idTeacher)
+        {
+            ReportRepository repo = new ReportRepository();
+            var reports = repo.RetriveByTeacher(idTeacher);
+
+            return new ServerResponse<Report>()
+            {
+                Result = reports != null,
+                Data = reports
             };
         }
 
         // POST: api/Report
-        public void Post([FromBody]Report report)
+        public IHttpActionResult addReport([FromBody]Report report)
         {
             var repo = new ReportRepository();
             repo.Save(report);
-        }
-
-        // PUT: api/Report/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Report/5
-        public void Delete(int id)
-        {
+            return Ok();
         }
     }
 }
