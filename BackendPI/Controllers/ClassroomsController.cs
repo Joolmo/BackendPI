@@ -29,5 +29,23 @@ namespace BackendPI.Controllers
                 Result = result != null
             };
         }
+
+        public void Post([FromBody]Classroom classroom)
+        {
+            var repo = new ClassroomsRepository();
+            repo.SaveClassroom(classroom);
+        }
+
+        public void Post([FromBody] TeacherClassroom teacherClassroom)
+        {
+            var repo = new ClassroomsRepository();
+            repo.AddClassroomToTeacher(teacherClassroom.TeacherId, teacherClassroom.ClassroomId);
+        }
+
+        public void Post([FromBody] ChildClassroom childClassroom)
+        {
+            var repo = new ClassroomsRepository();
+            repo.AddClassroomToChild(childClassroom.ChildId, childClassroom.ClassroomId);
+        }
     }
 }

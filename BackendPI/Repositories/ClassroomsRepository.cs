@@ -87,5 +87,19 @@ namespace BackendPI.Models
             context.TeacherClassrooms.Add(teacherClassroom);
             context.SaveChanges();
         }
+
+        internal void AddClassroomToChild(int idchild, int idclass)
+        {
+            BackendContext context = new BackendContext();
+
+            ChildClassroom childClassroom = new ChildClassroom()
+            {
+                ClassroomId = idclass,
+                ChildId = idchild
+            };
+
+            context.ChildClassrooms.Add(childClassroom);
+            context.SaveChanges();
+        }
     }
 }
