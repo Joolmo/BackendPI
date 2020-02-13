@@ -40,12 +40,12 @@ namespace BackendPI.Controllers
             };
         }
 
-        public ServerResponse<ChildDTO> GetByClass(int idClass)
+        public ServerResponse<Child> GetByClass(int idClass)
         {
             UserRepository repo = new UserRepository();
             var children = repo.getChildrenByClass(idClass);
 
-            return new ServerResponse<ChildDTO>()
+            return new ServerResponse<Child>()
             {
                 Data = children,
                 Result = children != null

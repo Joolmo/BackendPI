@@ -186,28 +186,20 @@ namespace BackendPI.Models
             context.SaveChanges();
         }
 
-        internal List<ChildDTO> getChildrenByClass(int id)
+        internal List<Child> getChildrenByClass(int id)
         {
-            List<ChildDTO> child;
+            List<Child> children;
 
             try
             {
                 using (var context = new BackendContext())
                 {
-                    child = context.Classrooms
+                    children = context.Classrooms
                         .Where(t => t.Id == id)
                         .Include(t => t.ChildrenClassrooms)
-                        .ThenInclude(tc => tc.Child.User)
+                        .ThenInclude(tc => tc.Child)
                         .Select(t => t.ChildrenClassrooms.Select(cc => cc.Child))
                         .FirstOrDefault()
-                        .Select(c => new ChildDTO()
-                        {
-                            Id = c.Id,
-                            Name = c.Name,
-                            Password = c.User.Password,
-                            Surname = c.Surname,
-                            UserName = c.User.UserName
-                        })
                         .ToList();
                 }
             }
@@ -217,7 +209,7 @@ namespace BackendPI.Models
                 return null;
             }
 
-            return child;
+            return children;
         }
     }
 }
