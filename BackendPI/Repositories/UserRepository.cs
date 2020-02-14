@@ -171,20 +171,43 @@ namespace BackendPI.Models
             }
         }
 
-        internal void modifyChild(Child child)
+        internal bool modifyChild(ChildDTO child)
         {
-            BackendContext context = new BackendContext();
+            try
+            {
+                using (BackendContext context = new BackendContext())
+                {
+                    context.Users.Single(u => u.Id == child.Id).Password = child.Password;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
 
-            context.Children.Update(child);
-            context.SaveChanges();
+            return true;
         }
 
-        internal void modifyTeacher(Teacher teacher)
+        // Temporalmente solo modifica la contraseña
+        internal bool modifyTeacher(TeacherDTO teacher)
         {
-            BackendContext context = new BackendContext();
+            try
+            {
+                using(BackendContext context = new BackendContext())
+                {
+                    context.Users.Single(u => u.Id == teacher.Id).Password = teacher.Password;
+                    context.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
 
-            context.Teachers.Update(teacher);
-            context.SaveChanges();
+            return true;
         }
 
         internal List<Child> getChildrenByClass(int id)
