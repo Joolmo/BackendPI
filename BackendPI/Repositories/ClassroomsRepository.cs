@@ -39,18 +39,20 @@ namespace BackendPI.Models
 
         public List<ClassroomDTO> RetrieveClassrooms()
         {
-            var context = new BackendContext();
             List<ClassroomDTO> classrooms;
 
             try
             {
-                classrooms = context.Classrooms
-                    .Select(c => new ClassroomDTO()
-                    {
-                        Id = c.Id,
-                        Name = c.Name
-                    })
-                    .ToList();
+                using (var context = new BackendContext())
+                {
+                    classrooms = context.Classrooms
+                        .Select(c => new ClassroomDTO()
+                        {
+                            Id = c.Id,
+                            Name = c.Name
+                        })
+                        .ToList();
+                }
             }
             catch (Exception ex)
             {
@@ -61,31 +63,40 @@ namespace BackendPI.Models
             return classrooms;
         }
 
-        internal void SaveClassroom(Classroom c)
+        internal void SaveClassroom(Classroom classroom)
         {
-            BackendContext context = new BackendContext();
-
-            Classroom classroom = new Classroom()
+            using(BackendContext context = new BackendContext())
             {
-                Name = c.Name
-            };
-
-            context.Classrooms.Add(classroom);
-            context.SaveChanges();
+                context.Classrooms.Add(classroom);
+                context.SaveChanges();
+            }
         }
 
-        internal void AddClassroomToTeacher(int idteacher, int idclass)
+        internal bool AddClassroomToTeacher(int idteacher, int idclass)
         {
-            BackendContext context = new BackendContext();
+            TeacherClassroom teacherClassroom;
 
-            TeacherClassroom teacherClassroom = new TeacherClassroom()
+            try
             {
-                ClassroomId = idclass,
-                TeacherId = idteacher,
-            };
+                using (BackendContext context = new BackendContext())
+                {
+                    teacherClassroom = new TeacherClassroom()
+                    {
+                        ClassroomId = idclass,
+                        TeacherId = idteacher,
+                    };
 
-            context.TeacherClassrooms.Add(teacherClassroom);
-            context.SaveChanges();
+                    context.TeacherClassrooms.Add(teacherClassroom);
+                    context.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
         internal void AddClassroomToChild(int idchild, int idclass)

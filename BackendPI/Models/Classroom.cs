@@ -7,7 +7,7 @@ namespace BackendPI.Models
 {
     public class Classroom
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
 
         public List<ChildClassroom> ChildrenClassrooms { get; set; }
@@ -16,7 +16,7 @@ namespace BackendPI.Models
 
     public class ClassroomDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
     }
  }

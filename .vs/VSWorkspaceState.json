@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BackendPI",
+    "\\BackendPI\\Controllers"
   ],
   "SelectedNode": "\\BackendPI.sln",
   "PreviewInSolutionExplorer": false

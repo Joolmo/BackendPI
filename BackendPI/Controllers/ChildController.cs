@@ -12,7 +12,7 @@ namespace BackendPI.Controllers
     public class ChildController : ApiController
     {
         // GET: api/Child
-        public ServerResponse<ChildDTO> Get()
+        public ServerResponse<ChildDTO> GetAllChildren()
         {
             UserRepository repo = new UserRepository();
             var children = repo.RetrieveAllChildren();
@@ -25,7 +25,7 @@ namespace BackendPI.Controllers
         }
 
         // GET: api/Child/5
-        public ServerResponse<ChildDTO> Get(int id)
+        public ServerResponse<ChildDTO> GetChildById(int id)
         {
             UserRepository repo = new UserRepository();
             var childDTO = repo.RetrieveChild(id);
@@ -40,7 +40,7 @@ namespace BackendPI.Controllers
             };
         }
 
-        public ServerResponse<Child> GetByClass(int idClass)
+        public ServerResponse<Child> GetChildByClass(int idClass)
         {
             UserRepository repo = new UserRepository();
             var children = repo.getChildrenByClass(idClass);
@@ -53,10 +53,26 @@ namespace BackendPI.Controllers
         }
 
         // POST: api/Child
-        public void Post([FromBody]ChildDTO child)
+        public IHttpActionResult Post([FromBody]ChildDTO child)
         {
+            if (child.Id != null) return BadRequest();
+            if (child.Name == null) return BadRequest();
+            if (child.Password == null) return BadRequest();
+            if (child.Surname == null) return BadRequest();
+            if (child.UserName == null) return BadRequest();
+
             var repo = new UserRepository();
-            repo.SaveChild(child);
+
+            try {
+                repo.SaveChild(child);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
+
+            return Ok();
         }
 
         // PUT: api/Child/5

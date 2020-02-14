@@ -147,27 +147,28 @@ namespace BackendPI.Models
 
         internal void SaveChild(ChildDTO c)
         {
-            BackendContext context = new BackendContext();
-
-            User user = new User()
+            using (BackendContext context = new BackendContext())
             {
-                UserName = c.UserName,
-                Password = c.Password,
-            };
+                User user = new User()
+                {
+                    UserName = c.UserName,
+                    Password = c.Password,
+                };
 
-            context.Users.Add(user);
-            context.SaveChanges();
+                context.Users.Add(user);
+                context.SaveChanges();
 
-            var id = context.Users.Where(e => e.UserName == c.UserName).First().Id;
-            Child child = new Child()
-            {
-                Id = id,
-                Surname = c.Surname,
-                Name = c.Name,
-            };
+                var id = context.Users.Where(e => e.UserName == c.UserName).First().Id;
+                Child child = new Child()
+                {
+                    Id = id,
+                    Surname = c.Surname,
+                    Name = c.Name,
+                };
 
-            context.Children.Add(child);
-            context.SaveChanges();
+                context.Children.Add(child);
+                context.SaveChanges();
+            }
         }
 
         internal void modifyChild(Child child)

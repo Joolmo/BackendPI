@@ -10,7 +10,7 @@ namespace BackendPI.Models
     public class Child 
     {
         [ForeignKey(nameof(User))]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public User User { get; set; }
 
         public string Name { get; set; }
@@ -22,7 +22,7 @@ namespace BackendPI.Models
 
     public class ChildDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using BackendPI.Models;
+using System;
 using System.Web.Http;
 
 
@@ -30,20 +31,35 @@ namespace BackendPI.Controllers
             };
         }
 
-        public void Post([FromBody]Classroom classroom)
+        public IHttpActionResult Post([FromBody]Classroom classroom)
         {
+            if (classroom.Id != null) return BadRequest();
+            if (classroom.Name == null) return BadRequest();
+
             var repo = new ClassroomsRepository();
-            repo.SaveClassroom(classroom);
+
+            try {
+                repo.SaveClassroom(classroom);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
+
+            return Ok();
         }
 
-        [Route("api/{controller}/teachers")] [HttpPost]
-        public void Post([FromBody] TeacherClassroom teacherClassroom)
+        [Route("api/classrooms/teachers")] [HttpPost]
+        public IHttpActionResult addTeacherClassroom([FromBody] TeacherClassroom teacherClassroom)
         {
             var repo = new ClassroomsRepository();
-            repo.AddClassroomToTeacher(teacherClassroom.TeacherId, teacherClassroom.ClassroomId);
+
+            if (repo.AddClassroomToTeacher(teacherClassroom.TeacherId, teacherClassroom.ClassroomId)) return Ok();
+            else return BadRequest();
         }
 
-        [Route("api/{controller}/children")] [HttpPost]
+        [Route("api/classrooms/children")] [HttpPost]
         public void Post([FromBody] ChildClassroom childClassroom)
         {
             var repo = new ClassroomsRepository();
