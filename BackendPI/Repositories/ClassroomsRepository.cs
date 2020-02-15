@@ -74,12 +74,12 @@ namespace BackendPI.Models
 
         internal bool AddClassroomToTeacher(int idteacher, int idclass)
         {
-            TeacherClassroom teacherClassroom;
-
             try
             {
                 using (BackendContext context = new BackendContext())
                 {
+                    TeacherClassroom teacherClassroom;
+
                     teacherClassroom = new TeacherClassroom()
                     {
                         ClassroomId = idclass,
