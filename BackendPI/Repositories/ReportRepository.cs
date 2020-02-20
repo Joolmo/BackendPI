@@ -37,7 +37,8 @@ namespace BackendPI.Models
                         .Select(t => t.TeachersClasrooms.Select(tc => tc.Classroom.ChildrenClassrooms.Select(cc => cc.Child.Reports)))
                         .SingleOrDefault()
                         .Aggregate((acc, ele) => acc.Concat(ele))
-                        .Aggregate((acc, ele) => { acc.AddRange(ele); return acc; });
+                        .Aggregate((acc, ele) => { acc.AddRange(ele); return acc; })
+                        .Distinct().ToList();
                 }
             }
             catch(Exception ex)

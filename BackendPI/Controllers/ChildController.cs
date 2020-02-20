@@ -76,10 +76,11 @@ namespace BackendPI.Controllers
         }
 
         // PUT: api/Child/5
-        public void Put([FromBody]Child child)
+        public IHttpActionResult Put([FromBody]ChildDTO child)
         {
             var repo = new UserRepository();
-            repo.modifyChild(child);
+            if (repo.modifyChild(child)) return Ok();
+            else return BadRequest();
         }
 
         // DELETE: api/Child/5
