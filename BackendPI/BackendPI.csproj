@@ -263,9 +263,9 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
-    <Compile Include="Migrations\20200213144708_m1.cs" />
-    <Compile Include="Migrations\20200213144708_m1.designer.cs">
-      <DependentUpon>20200213144708_m1.cs</DependentUpon>
+    <Compile Include="Migrations\20200214154455_m1.cs" />
+    <Compile Include="Migrations\20200214154455_m1.designer.cs">
+      <DependentUpon>20200214154455_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BackendContextModelSnapshot.cs" />
     <Compile Include="TokenHandler\TokenGenerator.cs" />
@@ -318,8 +318,11 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\BackendPI - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\BackendPI - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\BackendPI - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\BackendPI - ReadOnly - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\BackendPI - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\BackendPI - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -65,5 +65,19 @@ namespace BackendPI.Controllers
             var repo = new ClassroomsRepository();
             repo.AddClassroomToChild(childClassroom.ChildId, childClassroom.ClassroomId);
         }
+
+        [Route("api/classrooms/children")] [HttpDelete]
+        public IHttpActionResult Delete(ChildClassroom childClassroom)
+        {
+            try
+            {
+                var repository = new ClassroomsRepository();
+                repository.Eliminar(childClassroom);
+                return Ok();
+            }
+            catch {
+                return BadRequest();
+            }
+        }
     }
 }

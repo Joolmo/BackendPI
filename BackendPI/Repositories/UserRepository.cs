@@ -179,6 +179,19 @@ namespace BackendPI.Models
             context.SaveChanges();
         }
 
+        internal void deleteChild(int childid)
+        {
+            using (BackendContext context = new BackendContext())
+            {
+                var child = context.Children
+                    .Where(e => e.Id == childid)
+                    .FirstOrDefault();
+
+                context.Children.Remove(child);
+                context.SaveChanges();
+            }
+        }
+
         internal void modifyTeacher(Teacher teacher)
         {
             BackendContext context = new BackendContext();

@@ -39,6 +39,11 @@ namespace BackendPI.Models
             builder.Entity<Teacher>();
             builder.Entity<Child>();
 
+            builder.Entity<ChildClassroom>()
+                .HasKey(c => new { c.ClassroomId, c.ChildId });
+            builder.Entity<TeacherClassroom>()
+                .HasKey(c => new { c.ClassroomId, c.TeacherId });
+
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.

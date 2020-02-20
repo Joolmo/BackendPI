@@ -9,8 +9,6 @@ namespace BackendPI.Models
 {
     public class TeacherClassroom
     {
-        public int Id { get; set; }
-
         public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 

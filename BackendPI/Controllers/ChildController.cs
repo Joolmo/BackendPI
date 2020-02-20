@@ -83,8 +83,19 @@ namespace BackendPI.Controllers
         }
 
         // DELETE: api/Child/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int childid)
         {
+            try
+            {
+                var repository = new UserRepository();
+                repository.deleteChild(childid);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

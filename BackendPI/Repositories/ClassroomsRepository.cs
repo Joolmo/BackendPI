@@ -112,5 +112,18 @@ namespace BackendPI.Models
             context.ChildClassrooms.Add(childClassroom);
             context.SaveChanges();
         }
+
+        internal void Eliminar(ChildClassroom childClassroom)
+        {
+            using (BackendContext context = new BackendContext())
+            {
+                var child = context.ChildClassrooms
+                    .Where(e => e.ChildId == childClassroom.ChildId && e.ClassroomId == childClassroom.ClassroomId)
+                    .FirstOrDefault();
+
+                context.ChildClassrooms.Remove(child);
+                context.SaveChanges();
+            }
+        }
     }
 }

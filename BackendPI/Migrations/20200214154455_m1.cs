@@ -76,14 +76,12 @@ namespace BackendPI.Migrations
                 name: "ChildClassrooms",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ChildId = table.Column<int>(nullable: false),
                     ClassroomId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChildClassrooms", x => x.Id);
+                    table.PrimaryKey("PK_ChildClassrooms", x => new { x.ClassroomId, x.ChildId });
                     table.ForeignKey(
                         name: "FK_ChildClassrooms_Children_ChildId",
                         column: x => x.ChildId,
@@ -122,14 +120,12 @@ namespace BackendPI.Migrations
                 name: "TeacherClassrooms",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TeacherId = table.Column<int>(nullable: false),
                     ClassroomId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherClassrooms", x => x.Id);
+                    table.PrimaryKey("PK_TeacherClassrooms", x => new { x.ClassroomId, x.TeacherId });
                     table.ForeignKey(
                         name: "FK_TeacherClassrooms_Classrooms_ClassroomId",
                         column: x => x.ClassroomId,
@@ -150,19 +146,9 @@ namespace BackendPI.Migrations
                 column: "ChildId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChildClassrooms_ClassroomId",
-                table: "ChildClassrooms",
-                column: "ClassroomId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reports_ChildId",
                 table: "Reports",
                 column: "ChildId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeacherClassrooms_ClassroomId",
-                table: "TeacherClassrooms",
-                column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeacherClassrooms_TeacherId",
