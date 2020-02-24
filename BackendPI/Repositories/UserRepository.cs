@@ -198,10 +198,17 @@ namespace BackendPI.Models
                     .Where(e => e.Id == childid)
                     .FirstOrDefault();
 
+                var user = context.Users
+                    .Where(e => e.Id == childid)
+                    .FirstOrDefault();
+
+
                 context.Children.Remove(child);
+                context.Users.Remove(user);
                 context.SaveChanges();
             }
         }
+
 
         internal bool modifyTeacher(TeacherDTO teacher)
         {
